@@ -1,0 +1,178 @@
+{
+  "bufferBlocks": 40,
+  "schema": {
+    "tables": [
+      {
+        "name": "Aerodrom",
+        "rowCount": 120,
+        "blockCount": 12,
+        "rowsPerBlock": 10,
+        "attributes": [
+          {
+            "name": "sifraAerodroma",
+            "type": "STRING",
+            "unique": true,
+            "distinctValues": 120
+          },
+          {
+            "name": "naziv",
+            "type": "STRING",
+            "unique": true,
+            "distinctValues": 120
+          },
+          {
+            "name": "grad",
+            "type": "STRING",
+            "unique": false,
+            "distinctValues": 75
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_aerodrom_sifra_clustered",
+            "attributes": [
+              "sifraAerodroma"
+            ],
+            "type": "B_PLUS_TREE",
+            "clustered": true,
+            "treeHeight": 2
+          },
+          {
+            "name": "idx_aerodrom_grad_hash",
+            "attributes": [
+              "grad"
+            ],
+            "type": "HASH",
+            "clustered": false
+          }
+        ]
+      },
+      {
+        "name": "Avion",
+        "rowCount": 350,
+        "blockCount": 35,
+        "rowsPerBlock": 10,
+        "attributes": [
+          {
+            "name": "registracija",
+            "type": "STRING",
+            "unique": true,
+            "distinctValues": 350
+          },
+          {
+            "name": "model",
+            "type": "STRING",
+            "unique": false,
+            "distinctValues": 25
+          },
+          {
+            "name": "kapacitet",
+            "type": "INT",
+            "unique": false,
+            "distinctValues": 30
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_avion_registracija_hash",
+            "attributes": [
+              "registracija"
+            ],
+            "type": "HASH",
+            "clustered": false
+          },
+          {
+            "name": "idx_avion_model_btree",
+            "attributes": [
+              "model"
+            ],
+            "type": "B_PLUS_TREE",
+            "clustered": false,
+            "treeHeight": 2
+          }
+        ]
+      },
+      {
+        "name": "Let",
+        "rowCount": 14000,
+        "blockCount": 1400,
+        "rowsPerBlock": 10,
+        "attributes": [
+          {
+            "name": "brojLeta",
+            "type": "STRING",
+            "unique": true,
+            "distinctValues": 14000
+          },
+          {
+            "name": "polazniAerodrom",
+            "type": "STRING",
+            "unique": false,
+            "distinctValues": 120
+          },
+          {
+            "name": "odredisniAerodrom",
+            "type": "STRING",
+            "unique": false,
+            "distinctValues": 120
+          },
+          {
+            "name": "registracijaAviona",
+            "type": "STRING",
+            "unique": false,
+            "distinctValues": 350
+          },
+          {
+            "name": "status",
+            "type": "STRING",
+            "unique": false,
+            "distinctValues": 4
+          },
+          {
+            "name": "cena",
+            "type": "DOUBLE",
+            "unique": false,
+            "distinctValues": 900
+          }
+        ],
+        "indexes": [
+          {
+            "name": "idx_let_broj_clustered",
+            "attributes": [
+              "brojLeta"
+            ],
+            "type": "B_PLUS_TREE",
+            "clustered": true,
+            "treeHeight": 3
+          },
+          {
+            "name": "idx_let_avion_hash",
+            "attributes": [
+              "registracijaAviona"
+            ],
+            "type": "HASH",
+            "clustered": false
+          },
+          {
+            "name": "idx_let_status_btree",
+            "attributes": [
+              "status"
+            ],
+            "type": "B_PLUS_TREE",
+            "clustered": false,
+            "treeHeight": 3
+          },
+          {
+            "name": "idx_let_polazni_status_hash",
+            "attributes": [
+              "polazniAerodrom",
+              "status"
+            ],
+            "type": "HASH",
+            "clustered": false
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,57 @@
+//obicni
+
+python main.py primer_ulaza.json "SELECT prosek FROM Student"
+
+python main.py primer_ulaza.json "SELECT ime, smer FROM Student WHERE indeks = 'IS2022456'"
+
+python main.py primer_ulaza.json "SELECT indeks, godinaUpisa FROM Student WHERE smer = 'RTI'"
+
+python main.py primer_ulaza.json "SELECT indeks, prosek FROM Student ORDER BY indeks"
+
+python main.py primer_ulaza.json "SELECT smer, godinaUpisa FROM Student WHERE ime = 'Marko'"
+
+//Kompozitni B+ indeks (smer, prosek)
+
+python main.py primer_ulaza.json "SELECT ime, godinaUpisa FROM Student WHERE smer = 'SI' AND prosek = 8.7"
+
+//2 tabele spaja
+
+python main.py primer_ulaza.json "SELECT i.ispitId, s.prosek FROM Ispit i, Student s WHERE i.studentIndeks = s.indeks"
+
+python main.py primer_ulaza.json "SELECT i.datum, s.ime FROM Ispit i, Student s WHERE i.studentIndeks = s.indeks AND s.godinaUpisa = 2024"
+
+//spajanje -4 tabele
+
+python main.py primer_ulaza.json "SELECT Student.indeks, Predmet.espb, Ispit.ocena, Stipendija.iznos FROM Student, Ispit, Predmet, Stipendija WHERE Student.indeks = Ispit.studentIndeks AND Ispit.predmetId = Predmet.predmetId AND Student.indeks = Stipendija.studentIndeks AND Student.godinaUpisa = 2023 AND Ispit.ocena >= 8 AND Stipendija.iznos >= 10000 ORDER BY Student.indeks"
+
+python main.py primer_ulaza.json "SELECT Student.ime, Student.smer, Predmet.naziv, Ispit.datum, Stipendija.tip, Stipendija.iznos FROM Student, Ispit, Predmet, Stipendija WHERE Student.indeks = Ispit.studentIndeks AND Ispit.predmetId = Predmet.predmetId AND Student.indeks = Stipendija.studentIndeks AND Student.smer = 'RTI' AND Predmet.espb >= 5 AND Stipendija.tip = 'Privatna' ORDER BY Predmet.naziv"
+
+//losi upiti
+
+python main.py primer_ulaza.json "SELECT godinaUpisa FROM Student GROUP BY godinaUpisa"
+
+python main.py primer_ulaza.json "SELECT a FROM Student, Ispit, Predmet, Stipendija, Student"
+
+python main.py primer_ulaza.json "SELECT naziv FROM Fakultet"
+
+python main.py primer_ulaza.json "SELECT brojTelefona FROM Student"
+
+python main.py primer_ulaza.json "SELECT prosek FROM Student WHERE prosek = 'odlican'"
+
+//obicni - aerodrom
+
+python main.py primer.json "SELECT naziv, grad FROM Aerodrom"
+
+python main.py primer.json "SELECT model, kapacitet FROM Avion WHERE registracija = 'YU-ABC'"
+
+python main.py primer.json "SELECT brojLeta, cena FROM Let WHERE status = 'AKTIVAN'"
+
+python main.py primer.json "SELECT brojLeta, status FROM Let ORDER BY brojLeta"
+
+//dekart
+
+python main.py primer.json "SELECT Aerodrom.naziv, Avion.model FROM Aerodrom, Avion"
+
+python main.py primer.json "SELECT Avion.model, Let.brojLeta FROM Avion, Let WHERE Avion.registracija = Let.registracijaAviona AND Avion.kapacitet >= 180 AND Let.status = 'AKTIVAN'"
+
+python main.py primer.json "SELECT Aerodrom.naziv, Let.brojLeta FROM Aerodrom, Let WHERE Aerodrom.sifraAerodroma = Let.polazniAerodrom"
